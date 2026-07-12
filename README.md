@@ -2,6 +2,8 @@
 
 A browser-based photo gallery and social creative generator for Ideal Cannabis. It pairs strain photography with Flower Spectrum strips and fingerprint visuals, then exports six ready-to-post social formats.
 
+**Live preview:** [flower-spectrum-studio.vercel.app](https://flower-spectrum-studio.vercel.app)
+
 ## What changed in v1.1
 
 - Added an upload review dialog with image thumbnails and an explicit strain selector for every file.
