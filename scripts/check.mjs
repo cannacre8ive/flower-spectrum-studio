@@ -7,6 +7,10 @@ const required = [
   "id=\"selStrain\"",
   "Object.assign(photos,BAKED)",
   "function renderUploadQueue()",
+  "id=\"detailDialog\"",
+  "id=\"view-labels\"",
+  "function exportLabelSheet()",
+  "id=\"exportAllTemplates\"",
 ];
 
 const missing = required.filter((token) => !html.includes(token));

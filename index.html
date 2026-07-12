@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500;1,6..72,600&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html-to-image/1.11.11/html-to-image.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
 :root{
   --bg:#0e0e0c; --surface:#181715; --surface-2:#1f1d1a; --border:#2a2824;
@@ -102,6 +103,12 @@ main{padding:34px 26px 90px;}
 .upload-thumb{width:72px;height:72px;object-fit:cover;border-radius:4px;background:#0b0b0a;}.upload-file{min-width:0}.upload-file b{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:13px}.upload-file span{font-family:var(--mono);font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}.upload-row select{width:100%;background:var(--bg);border:1px solid var(--border);color:var(--fg);padding:9px;border-radius:2px;}
 .upload-foot{border-top:1px solid var(--border);border-bottom:0}.upload-foot .hint{font-family:var(--mono);font-size:9px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}.upload-foot .actions{display:flex;gap:10px}.remove-file{appearance:none;border:0;background:transparent;color:var(--muted);font-size:20px;cursor:pointer}.remove-file:hover{color:var(--fg)}
 .selection-note{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 18px;background:rgba(106,175,160,.08);border-bottom:1px solid var(--border);}.selection-note strong{color:var(--accent)}.selection-note span{font-size:13px;color:var(--fg-dim)}
+.selection-actions{display:flex;gap:10px;flex-wrap:wrap}.wcard .expand-hint{display:flex;justify-content:space-between;align-items:center;margin-top:12px;padding-top:10px;border-top:1px solid var(--border);font-family:var(--mono);font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.detail-dialog{width:min(1040px,calc(100% - 32px));max-height:92vh;padding:0;border:1px solid var(--border);border-radius:8px;background:#111411;color:var(--fg);box-shadow:0 28px 90px rgba(0,0,0,.72)}.detail-dialog::backdrop{background:rgba(5,7,5,.84);backdrop-filter:blur(6px)}
+.detail-close{position:absolute;top:18px;right:18px;z-index:3;background:rgba(14,14,12,.75)}.detail-hero{display:grid;grid-template-columns:1.18fr .82fr;min-height:360px}.detail-photo{position:relative;min-height:360px;background:#080a08}.detail-photo img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}.detail-summary{padding:46px 42px;display:flex;flex-direction:column}.detail-kick{font-family:var(--mono);font-size:10px;letter-spacing:.22em;color:var(--accent);text-transform:uppercase}.detail-name{font-family:var(--display);font-size:52px;line-height:.95;margin:16px 0 8px}.detail-cross{font-family:var(--display);font-style:italic;color:var(--fg-dim);font-size:19px}.detail-metrics{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--border);margin-top:auto}.detail-metric{padding:16px;border-right:1px solid var(--border)}.detail-metric:last-child{border:0}.detail-metric span{display:block;font-family:var(--mono);font-size:8px;letter-spacing:.14em;color:var(--muted);text-transform:uppercase}.detail-metric b{font-family:var(--display);font-size:26px}.detail-body{display:grid;grid-template-columns:.8fr 1.2fr;border-top:1px solid var(--border)}.detail-id{padding:34px;border-right:1px solid var(--border)}.detail-copy{padding:34px}.detail-copy h3,.label-head h2{font-family:var(--display);font-size:28px;margin:0 0 12px}.detail-copy p{color:var(--fg-dim);font-size:16px}.profile-bars{margin-top:20px}.profile-row{display:grid;grid-template-columns:110px 1fr 34px;gap:10px;align-items:center;margin:8px 0;font-family:var(--mono);font-size:9px;color:var(--fg-dim)}.profile-track{height:7px;background:var(--border)}.profile-fill{height:100%}.detail-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+.label-workspace{display:grid;grid-template-columns:300px minmax(0,1fr);gap:24px}.label-controls{border:1px solid var(--border);background:var(--surface);padding:20px;height:max-content;position:sticky;top:70px}.label-controls .ctrl{padding:0 0 16px;border:0}.label-actions{display:grid;gap:10px;margin-top:8px}.label-stage{border:1px solid var(--border);background:#d9d6ca;padding:28px;overflow:auto}.retail-label{width:720px;height:480px;background:#f2eddf;color:#201f1a;display:grid;grid-template-columns:18px 1fr 156px;grid-template-rows:1fr 16px 118px;font-family:Arial,sans-serif;box-shadow:0 12px 40px rgba(0,0,0,.22)}.label-rail{grid-row:1/-1;background:linear-gradient(to bottom,var(--label-a) 0 55%,var(--label-b) 55% 100%)}.label-main{padding:28px 30px 18px}.label-eyebrow{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#666257}.label-title{font-family:Georgia,serif;font-size:42px;line-height:1;margin:8px 0 4px}.label-farm{font-family:Georgia,serif;font-size:18px;color:#6b665b}.label-cross{font-size:10px;text-transform:uppercase;color:#888174;margin-top:4px}.label-aroma{font-family:Georgia,serif;font-size:18px;line-height:1.35;margin-top:20px}.label-id{padding:22px 20px;background:#e8e1d1;display:flex;flex-direction:column;align-items:center;justify-content:center}.label-id small{font-size:8px;letter-spacing:.16em;color:#716b5f;text-transform:uppercase;margin-top:6px}.label-strip{grid-column:2/-1}.label-foot{grid-column:2/-1;display:grid;grid-template-columns:1fr 150px;padding:16px 24px 14px}.label-bars .profile-row{grid-template-columns:110px 1fr 28px;color:#4d4a42;margin:5px 0}.label-stats{border-left:1px solid #cfc8b8;padding-left:20px;display:flex;flex-direction:column;justify-content:space-between}.label-stats b{font-family:Georgia,serif;font-size:25px}.label-stats span{font-size:9px;color:#6f695d;text-transform:uppercase}.label-note{font-size:8px;color:#80796c;text-transform:uppercase;margin-top:8px}.label-batch{margin-top:26px;border:1px solid var(--border);padding:18px}.label-batch h3{font-family:var(--display);margin:0 0 6px}.strain-checks{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:8px;margin:14px 0}.strain-check{display:flex;gap:9px;align-items:center;padding:10px;border:1px solid var(--border);font-size:12px;color:var(--fg-dim)}
+.label-stats{display:grid;grid-template-columns:1fr auto;grid-template-rows:1fr 1fr;gap:4px 10px;align-items:center}.label-stats>div b{font-size:21px}.label-stats>b:last-child{grid-column:2;grid-row:1/3;font-size:28px}.label-stats span{font-size:8px}
+@media(max-width:760px){.detail-hero,.detail-body,.label-workspace{grid-template-columns:1fr}.detail-photo{min-height:300px}.detail-id{border-right:0;border-bottom:1px solid var(--border)}.label-controls{position:static}.selection-note{align-items:flex-start;flex-direction:column}.retail-label{transform-origin:top left}.label-stage{padding:14px}}
 @media(max-width:620px){.upload-row{grid-template-columns:56px minmax(0,1fr) 34px}.upload-thumb{width:56px;height:56px}.upload-row select{grid-column:1/-1}.upload-foot{align-items:flex-end}.upload-foot .hint{display:none}}
 </style>
 </head>
@@ -128,17 +135,18 @@ main{padding:34px 26px 90px;}
 <nav class="tabs" id="tabs">
   <button class="active" data-view="wall">Gallery Wall</button>
   <button data-view="templates">Social Templates</button>
+  <button data-view="labels">Retail Labels</button>
   <button data-view="guide">How to Use</button>
 </nav>
 <main>
   <section class="view active" id="view-wall">
     <div class="sectlead">The Ideal Cannabis wall</div>
-    <div class="sectsub">Photography © Spencer Gray · classifications simulated for layout · tap a card to swap its photo</div>
+    <div class="sectsub">Photography © Spencer Gray · classifications simulated for layout · select a card to expand its Flower Spectrum ID</div>
     <div class="wall" id="wall"></div>
   </section>
   <section class="view" id="view-templates">
     <div class="controls">
-      <div class="selection-note"><span>Templates below use <strong id="selectedStrainName">GMO</strong> and its assigned image.</span><button class="btn primary" id="templateUploadBtn" type="button">Change this photo</button></div>
+      <div class="selection-note"><span>Templates below use <strong id="selectedStrainName">GMO</strong> and its assigned image.</span><div class="selection-actions"><button class="btn" id="templateUploadBtn" type="button">Change this photo</button><button class="btn primary" id="exportAllTemplates" type="button">Export all 6</button></div></div>
       <div class="ctrl"><label>Featured strain</label><select id="selStrain"></select></div>
       <div class="ctrl"><label>Aroma spotlight profile</label><select id="selProfile"></select></div>
       <div class="ctrl"><label>Compare against</label><select id="selCompare"></select></div>
@@ -146,6 +154,21 @@ main{padding:34px 26px 90px;}
       <div class="ctrl"><label>Social handle</label><input id="inHandle" type="text" value="@idealcannabis" maxlength="28" /></div>
     </div>
     <div class="gallery" id="gallery"></div>
+  </section>
+  <section class="view" id="view-labels">
+    <div class="sectlead">Flower Spectrum retail labels</div>
+    <div class="sectsub">Generate shelf-ready IDs for dispensary menus, display cases, and printed label sheets</div>
+    <div class="label-workspace">
+      <aside class="label-controls">
+        <div class="ctrl"><label>Label strain</label><select id="labelStrain"></select></div>
+        <div class="ctrl"><label>Retail price</label><input id="labelPrice" type="text" value="$42" maxlength="8" /></div>
+        <div class="ctrl"><label>Total terpenes</label><input id="labelTerps" type="text" value="2.40%" maxlength="8" /></div>
+        <div class="label-actions"><button class="btn primary" id="exportLabelPng" type="button">Export label PNG</button><button class="btn" id="exportLabelPdf" type="button">Export single PDF</button></div>
+      </aside>
+      <div><div class="label-stage" id="labelStage"><div id="labelPreview"></div></div>
+        <div class="label-batch"><h3>Print a label sheet</h3><div class="sectsub">Choose up to six loaded strains for one letter-size PDF</div><div class="strain-checks" id="labelStrainChecks"></div><button class="btn primary" id="exportLabelSheet" type="button">Export selected PDF sheet</button></div>
+      </div>
+    </div>
   </section>
   <section class="view" id="view-guide">
     <div class="prose">
@@ -155,7 +178,9 @@ main{padding:34px 26px 90px;}
       <div class="callout teal"><div class="ct">About the fingerprints</div><p>Classifications are <strong>simulated</strong> — believable, engine-consistent shapes for layout demonstration, flagged &ldquo;SIM&rdquo; wherever they appear. They are not lab results. Run each strain&rsquo;s COA through the Chemovar Classifier to publish real ones. Kush Mints is the exception — it uses its real validated panel and is marked &ldquo;REAL.&rdquo;</p></div>
       <div class="callout"><div class="ct">Compliance</div><p>Aroma classification — not effects or medical claims. Aroma leads; THC is factual data. Keep effect language off anything public.</p></div>
       <h3>Swapping photos</h3>
-      <p>Drop a different web-final onto the loader to replace the matching strain, or tap any wall card to pick a new shot for it. <strong>Reset to originals</strong> restores the loaded set. Nothing uploads — files are read locally in your browser.</p>
+      <p>Drop a different web-final onto the loader, review its strain assignment, and apply it. Open any wall card for the full Flower Spectrum ID and a dedicated photo replacement action. <strong>Reset to originals</strong> restores the loaded set. Nothing uploads — files are read locally in your browser.</p>
+      <h3>Retail labels</h3><p>Choose a loaded strain, set the price and total terpenes, then export a label PNG, a single-label PDF, or a letter-size sheet containing up to six labels. Simulated profiles remain visibly marked <strong>SIM</strong>.</p>
+      <h3>Social template batches</h3><p>The loaded GMO example populates all six formats on first open. Choose any loaded strain from <strong>Featured strain</strong>, then export templates individually or use <strong>Export all 6</strong>.</p>
     </div>
   </section>
 </main>
@@ -169,6 +194,7 @@ main{padding:34px 26px 90px;}
   <div class="upload-body" id="uploadQueue"></div>
   <div class="upload-foot"><div class="hint">Nothing leaves this browser</div><div class="actions"><button class="btn" id="addMoreBtn" type="button">Add more</button><button class="btn primary" id="applyUploads" type="button">Apply photos</button></div></div>
 </dialog>
+<dialog class="detail-dialog" id="detailDialog" aria-labelledby="detailName"><button class="icon-btn detail-close" id="closeDetail" type="button" aria-label="Close strain details">&times;</button><div id="detailContent"></div></dialog>
 
 <script>
 const BAKED={
@@ -279,10 +305,17 @@ function wallCard(s){
       <div class="nm">${esc(s.name)}</div>
       <div class="bl" style="color:${s.lead.color}">${esc(s.blend)} · ${s.thc}% THC</div>
       <div class="strip">${stripHTML(s.c,{h:16,labels:"none"})}</div>
+      <div class="expand-hint"><span>View Flower Spectrum ID</span><span>Expand &rarr;</span></div>
     </div>
   </div>`;
 }
-function renderWall(){const w=document.getElementById("wall");w.innerHTML=STRAINS.map(wallCard).join("");w.querySelectorAll(".wcard").forEach(c=>c.addEventListener("click",()=>pickOne(c.dataset.strain)));}
+function profileBars(c,limit=5){return c.ranked.filter(r=>r.pct>0).slice(0,limit).map(r=>`<div class="profile-row"><span>${esc(r.label)}</span><div class="profile-track"><div class="profile-fill" style="width:${r.pct}%;background:${r.color}"></div></div><b>${r.pct}%</b></div>`).join("");}
+function openDetail(id){const s=SBK[id];detailContent.innerHTML=`<div class="detail-hero"><div class="detail-photo">${photos[id]?`<img src="${photos[id]}" alt="${esc(s.name)}"/>`:""}</div><div class="detail-summary"><div class="detail-kick">${s.real?"Validated COA":"Simulated example"} · ${esc(s.blend)}</div><h2 class="detail-name" id="detailName">${esc(s.name)}</h2><div class="detail-cross">${esc(s.cross)}</div><div class="detail-metrics"><div class="detail-metric"><span>THC</span><b>${s.thc}%</b></div><div class="detail-metric"><span>Confidence</span><b>${esc(s.c.confidence)}</b></div><div class="detail-metric"><span>Status</span><b>${s.real?"REAL":"SIM"}</b></div></div></div></div>
+  ${stripHTML(s.c,{h:22,labels:"none"})}<div class="detail-body"><div class="detail-id"><div class="detail-kick">Fingerprint ID</div><div style="display:flex;justify-content:center;margin:16px 0">${fingerprintSVG(s.c,{size:240,highlight:s.lead.key})}</div><div class="profile-bars">${profileBars(s.c)}</div></div><div class="detail-copy"><div class="detail-kick">Aroma read</div><h3>${esc(s.aroma)}</h3><p>${esc(PROFILE_CONTENT[s.lead.key].sensory)}</p><div class="detail-actions"><button class="btn primary" type="button" data-detail-social="${s.id}">Use in social templates</button><button class="btn" type="button" data-detail-label="${s.id}">Generate retail label</button><button class="btn" type="button" data-detail-photo="${s.id}">Replace photo</button></div></div></div>`;
+  detailContent.querySelector("[data-detail-social]").addEventListener("click",()=>{selStrain.value=id;renderTemplateSelection();detailDialog.close();activateView("templates");});
+  detailContent.querySelector("[data-detail-label]").addEventListener("click",()=>{labelStrain.value=id;renderLabel();detailDialog.close();activateView("labels");});
+  detailContent.querySelector("[data-detail-photo]").addEventListener("click",()=>{detailDialog.close();pickOne(id);});detailDialog.showModal();}
+function renderWall(){const w=document.getElementById("wall");w.innerHTML=STRAINS.map(wallCard).join("");w.querySelectorAll(".wcard").forEach(c=>{c.tabIndex=0;c.setAttribute("role","button");c.setAttribute("aria-label","Open details for "+SBK[c.dataset.strain].name);c.addEventListener("click",()=>openDetail(c.dataset.strain));c.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();openDetail(c.dataset.strain);}});});}
 
 /* ── TEMPLATES (framed photo + data on dark) ── */
 function T_highlight(s){
@@ -414,18 +447,29 @@ function renderGallery(){const g=document.getElementById("gallery");g.innerHTML=
   layoutFrames();g.querySelectorAll(".exp").forEach(btn=>btn.addEventListener("click",()=>exportPNG(btn)));}
 function layoutFrames(){document.querySelectorAll(".viewport").forEach(vp=>{const w=+vp.dataset.w,h=+vp.dataset.h,cw=vp.clientWidth,scale=cw/w;vp.style.height=(h*scale)+"px";const f=vp.querySelector(".frame");if(f)f.style.transform=`scale(${scale})`;});}
 window.addEventListener("resize",layoutFrames);
-function renderAll(){renderWall();renderGallery();}
+function renderAll(){renderWall();renderGallery();renderLabel();}
 
 let fontsReady=false;
-async function exportPNG(btn){const frame=btn.closest(".asset").querySelector(".frame");const w=+frame.dataset.w,h=+frame.dataset.h;
+async function nodePng(node,w,h,pixelRatio=2,skipFonts=false){
   if(!window.htmlToImage){toast("Export library didn't load — screenshot the preview.");return;}
-  const label=btn.textContent;btn.disabled=true;btn.textContent="Rendering…";
-  try{if(!fontsReady&&document.fonts&&document.fonts.ready){await document.fonts.ready;fontsReady=true;}
-    const opts={pixelRatio:2,width:w,height:h,cacheBust:true,style:{transform:"none",transformOrigin:"top left",margin:"0"}};
-    const url=await window.htmlToImage.toPng(frame,opts);
-    const a=document.createElement("a");a.href=url;a.download=btn.dataset.file+".png";document.body.appendChild(a);a.click();a.remove();toast("Saved "+btn.dataset.file+".png");
+  if(!fontsReady&&document.fonts&&document.fonts.ready){await document.fonts.ready;fontsReady=true;}
+  return window.htmlToImage.toPng(node,{pixelRatio,width:w,height:h,cacheBust:true,skipFonts,style:{transform:"none",transformOrigin:"top left",margin:"0"}});
+}
+function downloadUrl(url,file){const a=document.createElement("a");a.href=url;a.download=file;document.body.appendChild(a);a.click();a.remove();}
+async function exportPNG(btn){const frame=btn.closest(".asset").querySelector(".frame"),w=+frame.dataset.w,h=+frame.dataset.h;const label=btn.textContent;btn.disabled=true;btn.textContent="Rendering…";
+  try{const url=await nodePng(frame,w,h);downloadUrl(url,btn.dataset.file+".png");toast("Saved "+btn.dataset.file+".png");
   }catch(e){console.error(e);toast("Export failed — try again in a moment.");}finally{btn.disabled=false;btn.textContent=label;}}
+async function exportAllSocial(){const btn=document.getElementById("exportAllTemplates"),s=SBK[selStrain.value],assets=[...document.querySelectorAll(".asset")];btn.disabled=true;const label=btn.textContent;
+  try{for(let i=0;i<assets.length;i++){btn.textContent=`Exporting ${i+1} / ${assets.length}`;const frame=assets[i].querySelector(".frame"),file=assets[i].querySelector(".exp").dataset.file;downloadUrl(await nodePng(frame,+frame.dataset.w,+frame.dataset.h),file+".png");await new Promise(r=>setTimeout(r,180));}toast("Exported all templates for "+s.name);}catch(e){console.error(e);toast("Batch export stopped — try individual exports.");}finally{btn.disabled=false;btn.textContent=label;}}
 let toastT;function toast(m){const t=document.getElementById("toast");t.textContent=m;t.classList.add("show");clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove("show"),1700);}
+
+/* retail label studio */
+function labelHTML(s){const top=s.c.ranked.filter(r=>r.pct>0).slice(0,4),a=top[0],b=top[1]||top[0];return `<div class="retail-label" style="--label-a:${a.color};--label-b:${b.color}"><div class="label-rail"></div><div class="label-main"><div class="label-eyebrow">${esc(s.blend)} &nbsp;·&nbsp; ${esc(s.c.confidence)}</div><div class="label-title">${esc(s.name)}</div><div class="label-farm">${esc(FARM)}</div><div class="label-cross">${esc(s.cross)}</div><div class="label-aroma">${esc(s.aroma)}</div></div><div class="label-id">${fingerprintSVG(s.c,{size:116,highlight:s.lead.key,guide:"rgba(32,31,26,.2)",dot:"rgba(32,31,26,.65)"})}<small>Flower Spectrum ID · ${s.real?"REAL":"SIM"}</small></div><div class="label-strip">${stripHTML(s.c,{h:16,labels:"none"})}</div><div class="label-foot"><div class="label-bars">${top.map(r=>`<div class="profile-row"><span>${esc(r.label)}</span><div class="profile-track" style="background:#ddd6c7"><div class="profile-fill" style="width:${r.pct}%;background:${r.color}"></div></div><b>${r.pct}%</b></div>`).join("")}<div class="label-note">Aroma classification · not effects or medical claims</div></div><div class="label-stats"><div><span>THC</span><br><b>${s.thc}%</b></div><div><span>Total terpenes</span><br><b>${esc(labelTerps.value||"—")}</b></div><b>${esc(labelPrice.value||"")}</b></div></div></div>`;}
+function renderLabel(){labelPreview.innerHTML=labelHTML(SBK[labelStrain.value]);fitLabelPreview();}
+function fitLabelPreview(){const label=labelPreview.querySelector(".retail-label");if(!label)return;label.style.transform="none";labelPreview.style.height="auto";const available=Math.max(280,labelStage.clientWidth-56),scale=Math.min(1,available/720);label.style.transform=`scale(${scale})`;label.style.transformOrigin="top left";labelPreview.style.width=(720*scale)+"px";labelPreview.style.height=(480*scale)+"px";}
+async function labelPngFor(s){const holder=document.createElement("div");holder.style.cssText="position:fixed;left:-10000px;top:0";holder.innerHTML=labelHTML(s);document.body.appendChild(holder);try{return await nodePng(holder.firstElementChild,720,480,2,false);}finally{holder.remove();}}
+async function exportSingleLabel(format){const s=SBK[labelStrain.value],url=await labelPngFor(s);if(format==="png"){downloadUrl(url,`flower-spectrum-label-${s.id}.png`);return;}if(!window.jspdf){toast("PDF library did not load");return;}const {jsPDF}=window.jspdf,pdf=new jsPDF({orientation:"landscape",unit:"in",format:[4,2.667]});pdf.addImage(url,"PNG",0,0,4,2.667);pdf.save(`flower-spectrum-label-${s.id}.pdf`);}
+async function exportLabelSheet(){const selected=[...document.querySelectorAll("[data-label-check]:checked")].map(x=>SBK[x.value]).slice(0,6);if(!selected.length){toast("Choose at least one strain");return;}if(!window.jspdf){toast("PDF library did not load");return;}const btn=document.getElementById("exportLabelSheet"),label=btn.textContent;btn.disabled=true;try{const {jsPDF}=window.jspdf,pdf=new jsPDF({unit:"in",format:"letter"});for(let i=0;i<selected.length;i++){btn.textContent=`Building ${i+1} / ${selected.length}`;const url=await labelPngFor(selected[i]),col=i%2,row=Math.floor(i/2);pdf.addImage(url,"PNG",.2+col*4.1,.65+row*3.25,4,2.667);}pdf.save("flower-spectrum-retail-labels.pdf");toast("Retail label sheet exported");}finally{btn.disabled=false;btn.textContent=label;}}
 
 /* photo swap */
 function matchStrain(fn){const n=fn.toLowerCase();for(const s of STRAINS){if(s.match.some(k=>n.includes(k)))return s.id;}return null;}
@@ -452,15 +496,23 @@ function renderUploadQueue(){
 function updateCounter(){document.getElementById("counter").innerHTML="<b>"+Object.keys(photos).length+"</b> of "+STRAINS.length+" loaded";}
 let pendingOne=null;function pickOne(id){pendingOne=id;document.getElementById("oneInput").click();}
 
-const selStrain=document.getElementById("selStrain"),selProfile=document.getElementById("selProfile"),selCompare=document.getElementById("selCompare"),inFarm=document.getElementById("inFarm"),inHandle=document.getElementById("inHandle");
+const selStrain=document.getElementById("selStrain"),selProfile=document.getElementById("selProfile"),selCompare=document.getElementById("selCompare"),inFarm=document.getElementById("inFarm"),inHandle=document.getElementById("inHandle"),labelStrain=document.getElementById("labelStrain"),labelPrice=document.getElementById("labelPrice"),labelTerps=document.getElementById("labelTerps"),labelPreview=document.getElementById("labelPreview"),labelStage=document.getElementById("labelStage"),detailDialog=document.getElementById("detailDialog"),detailContent=document.getElementById("detailContent");
 selStrain.innerHTML=STRAINS.map(s=>`<option value="${s.id}">${esc(s.name)} — ${esc(s.blend)}</option>`).join("");
 selProfile.innerHTML=PROFILES.map(p=>`<option value="${p.key}">${esc(p.label)}</option>`).join("");
 selCompare.innerHTML=STRAINS.map(s=>`<option value="${s.id}">${esc(s.name)}</option>`).join("");
+labelStrain.innerHTML=STRAINS.map(s=>`<option value="${s.id}">${esc(s.name)} — ${s.real?"Validated":"Simulated"}</option>`).join("");
+document.getElementById("labelStrainChecks").innerHTML=STRAINS.map((s,i)=>`<label class="strain-check"><input type="checkbox" data-label-check value="${s.id}" ${i<6?"checked":""}/> ${esc(s.name)}</label>`).join("");
 selStrain.value="gmo";selProfile.value="citrus_bright";selCompare.value="grapefruit_slushie";
 function renderTemplateSelection(){document.getElementById("selectedStrainName").textContent=SBK[selStrain.value].name;renderGallery();}
 selStrain.addEventListener("change",renderTemplateSelection);[selProfile,selCompare].forEach(el=>el.addEventListener("change",renderGallery));
 inFarm.addEventListener("input",()=>{FARM=inFarm.value||"Ideal Cannabis";renderAll();});
 inHandle.addEventListener("input",()=>{HANDLE=inHandle.value||"@yourfarm";renderGallery();});
+labelStrain.addEventListener("change",renderLabel);[labelPrice,labelTerps].forEach(el=>el.addEventListener("input",renderLabel));
+document.getElementById("exportAllTemplates").addEventListener("click",exportAllSocial);
+document.getElementById("exportLabelPng").addEventListener("click",()=>exportSingleLabel("png"));
+document.getElementById("exportLabelPdf").addEventListener("click",()=>exportSingleLabel("pdf"));
+document.getElementById("exportLabelSheet").addEventListener("click",exportLabelSheet);
+document.getElementById("closeDetail").addEventListener("click",()=>detailDialog.close());
 
 const loader=document.getElementById("loader"),fileInput=document.getElementById("fileInput"),oneInput=document.getElementById("oneInput"),uploadDialog=document.getElementById("uploadDialog"),uploadQueueEl=document.getElementById("uploadQueue"),applyUploads=document.getElementById("applyUploads");
 document.getElementById("pickBtn").addEventListener("click",()=>fileInput.click());
@@ -477,7 +529,9 @@ document.addEventListener("dragleave",e=>{if(e.target===document.documentElement
 document.addEventListener("drop",e=>{e.preventDefault();loader.classList.remove("drag");if(e.dataTransfer&&e.dataTransfer.files.length)queueFiles(e.dataTransfer.files);});
 
 document.getElementById("heroBand").innerHTML=PROFILES.map(p=>`<div class="s" style="background:${p.color}"><b>${p.short}</b></div>`).join("");
-document.querySelectorAll("nav.tabs button").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll("nav.tabs button").forEach(x=>x.classList.remove("active"));document.querySelectorAll(".view").forEach(x=>x.classList.remove("active"));b.classList.add("active");document.getElementById("view-"+b.dataset.view).classList.add("active");layoutFrames();}));
+function activateView(view){document.querySelectorAll("nav.tabs button").forEach(x=>x.classList.toggle("active",x.dataset.view===view));document.querySelectorAll(".view").forEach(x=>x.classList.remove("active"));document.getElementById("view-"+view).classList.add("active");layoutFrames();if(view==="labels")fitLabelPreview();window.scrollTo({top:document.getElementById("tabs").offsetTop,behavior:"smooth"});}
+document.querySelectorAll("nav.tabs button").forEach(b=>b.addEventListener("click",()=>activateView(b.dataset.view)));
+window.addEventListener("resize",fitLabelPreview);
 
 Object.assign(photos,BAKED);
 updateCounter();renderAll();
